@@ -1,4 +1,5 @@
 from typing import List, Optional
+import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import PlainTextResponse
@@ -6,10 +7,14 @@ from pydantic import BaseModel, Field
 
 app = FastAPI(title="Resume & Cover Letter AI Builder", version="0.1.0")
 
+# Get frontend URL from environment variable or use defaults
+frontend_url = os.getenv('FRONTEND_URL', 'http://localhost:5173')
+
 # Allow the Vite dev server (React) to call this API
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
+        frontend_url,
         "http://localhost:5173",
         "http://127.0.0.1:5173",
         "https://*.netlify.app",  # Allow all Netlify domains
