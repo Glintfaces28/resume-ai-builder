@@ -12,6 +12,9 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:5173",
         "http://127.0.0.1:5173",
+        "https://*.netlify.app",  # Allow all Netlify domains
+        "https://*.vercel.app",   # Allow all Vercel domains
+        "https://*.github.io",    # Allow GitHub Pages
     ],
     allow_credentials=True,
     allow_methods=["*"],
