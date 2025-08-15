@@ -6,7 +6,6 @@
 [build.environment]
   NODE_VERSION = "18"
 
-# SPA routing (same as public/_redirects)
 [[redirects]]
   from = "/*"
   to = "/index.html"
