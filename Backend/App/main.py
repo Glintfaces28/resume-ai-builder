@@ -8,6 +8,10 @@ from pydantic import BaseModel, Field
 
 app = FastAPI(title="Resume & Cover Letter AI Builder", version="0.1.0")
 
+@app.get("/")
+def root():
+    return {"message": "Resume AI Builder API", "status": "running"}
+
 # --- CORS (Netlify + local dev) ---
 _ALLOWED_ORIGINS = list(filter(None, [
     os.getenv("FRONTEND_URL"),                # e.g. https://sparkling-maamoul-3ec031.netlify.app
