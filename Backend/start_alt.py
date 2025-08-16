@@ -4,6 +4,7 @@ Alternative startup script for Railway
 """
 import os
 import sys
+import time
 
 # Add current directory to path
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -27,6 +28,10 @@ if __name__ == "__main__":
     print(f"🔧 Environment variables:")
     print(f"   PORT: {os.environ.get('PORT', 'NOT SET')}")
     print(f"   FRONTEND_URL: {os.environ.get('FRONTEND_URL', 'NOT SET')}")
+    
+    # Give the server a moment to fully initialize
+    print("⏳ Waiting for server to initialize...")
+    time.sleep(2)
     
     try:
         uvicorn.run(
