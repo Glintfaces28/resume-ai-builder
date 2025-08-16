@@ -4,7 +4,7 @@
     "builder": "NIXPACKS"
   },
   "deploy": {
-    "startCommand": "python minimal_backend.py",
+    "startCommand": "python railway_debug.py",
     "healthcheckPath": "/",
     "healthcheckTimeout": 60,
     "restartPolicyType": "ON_FAILURE",
