@@ -4,9 +4,9 @@
     "builder": "NIXPACKS"
   },
   "deploy": {
-    "startCommand": "python start.py",
-    "healthcheckPath": "/health",
-    "healthcheckTimeout": 300,
+    "startCommand": "python start_alt.py",
+    "healthcheckPath": "/",
+    "healthcheckTimeout": 600,
     "restartPolicyType": "ON_FAILURE",
     "restartPolicyMaxRetries": 10
   }

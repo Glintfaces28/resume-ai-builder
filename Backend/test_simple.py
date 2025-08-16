@@ -19,7 +19,11 @@ app.add_middleware(
 
 @app.get("/")
 def root():
-    return {"message": "Test Backend Running", "status": "ok"}
+    return {"message": "Test Backend Running", "status": "ok", "railway": "health_check"}
+
+@app.get("/railway-health")
+def railway_health():
+    return {"status": "ok", "railway": "health_check_passed"}
 
 @app.get("/health")
 def health():
