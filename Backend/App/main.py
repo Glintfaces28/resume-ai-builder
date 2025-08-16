@@ -7,20 +7,19 @@ from pydantic import BaseModel, Field
 
 app = FastAPI(title="Resume & Cover Letter AI Builder", version="0.1.0")
 
-# Get frontend URL from environment variable or use defaults
-frontend_url = os.getenv('FRONTEND_URL', 'http://localhost:5173')
+# --- CORS (Netlify + local dev) ---
+_ALLOWED_ORIGINS = list(filter(None, [
+    os.getenv("FRONTEND_URL"),                # e.g. https://sparkling-maamoul-3ec031.netlify.app
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+    "https://*.netlify.app",  # Allow all Netlify domains
+    "https://*.vercel.app",   # Allow all Vercel domains
+    "https://*.github.io",    # Allow GitHub Pages
+]))
 
-# Allow the Vite dev server (React) to call this API
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        frontend_url,
-        "http://localhost:5173",
-        "http://127.0.0.1:5173",
-        "https://*.netlify.app",  # Allow all Netlify domains
-        "https://*.vercel.app",   # Allow all Vercel domains
-        "https://*.github.io",    # Allow GitHub Pages
-    ],
+    allow_origins=_ALLOWED_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -375,3 +374,13 @@ def score_resume(body: ResumeScoreBody):
         "word_count": word_count,
         "bullet_points": bullet_points
     }
+
+# --- Health check & simple debug ---
+@app.get("/health")
+def health():
+    return {"status": "ok"}
+
+@app.get("/debug/origin")
+def debug_origin():
+    # Useful to see what origin and headers the server receives
+    return {"frontend_url_env": os.getenv("FRONTEND_URL")}
