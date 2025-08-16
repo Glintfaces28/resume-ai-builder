@@ -1,5 +1,6 @@
 from typing import List, Optional
 import os
+import sys
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import PlainTextResponse
@@ -12,9 +13,7 @@ _ALLOWED_ORIGINS = list(filter(None, [
     os.getenv("FRONTEND_URL"),                # e.g. https://sparkling-maamoul-3ec031.netlify.app
     "http://localhost:5173",
     "http://127.0.0.1:5173",
-    "https://*.netlify.app",  # Allow all Netlify domains
-    "https://*.vercel.app",   # Allow all Vercel domains
-    "https://*.github.io",    # Allow GitHub Pages
+    "https://sparkling-maamoul-3ec031.netlify.app",  # Your specific Netlify domain
 ]))
 
 app.add_middleware(
@@ -380,7 +379,20 @@ def score_resume(body: ResumeScoreBody):
 def health():
     return {"status": "ok"}
 
+@app.get("/api/health")
+def api_health():
+    return {"status": "ok", "message": "API health check"}
+
 @app.get("/debug/origin")
 def debug_origin():
     # Useful to see what origin and headers the server receives
     return {"frontend_url_env": os.getenv("FRONTEND_URL")}
+
+@app.get("/debug/info")
+def debug_info():
+    return {
+        "frontend_url_env": os.getenv("FRONTEND_URL"),
+        "allowed_origins": _ALLOWED_ORIGINS,
+        "python_version": sys.version,
+        "fastapi_version": "0.110+"
+    }
