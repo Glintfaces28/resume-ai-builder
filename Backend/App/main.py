@@ -400,3 +400,9 @@ def debug_info():
         "python_version": sys.version,
         "fastapi_version": "0.110+"
     }
+
+# --- Server startup ---
+if __name__ == "__main__":
+    import uvicorn
+    print("🚀 Starting Resume AI Builder backend on http://127.0.0.1:8000")
+    uvicorn.run(app, host="127.0.0.1", port=8000, reload=True)

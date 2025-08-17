@@ -1,0 +1,5 @@
+[33med7433f[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m Prod setup: API base, SPA redirects, Netlify build config
+[33m3d8c27e[m Netlify: build Frontend/ with Node 18 + SPA redirects
+[33mc849ffd[m Set API base URL for production and enable SPA redirects
+[33m23c1dd1[m Set API base for production + Netlify SPA redirects
+[33m05e58c5[m Railway: Procfile + root requirements for Backend/
