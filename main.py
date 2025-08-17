@@ -1,0 +1,18 @@
+#!/usr/bin/env python3
+"""
+Main entry point for Railway deployment
+"""
+import sys
+import os
+
+# Add the Backend directory to the Python path
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'Backend'))
+
+# Import the FastAPI app from Backend/main.py
+from main import app
+
+if __name__ == "__main__":
+    import uvicorn
+    port = int(os.environ.get("PORT", 8000))
+    print(f"🚀 Starting Resume AI Builder backend on port {port}")
+    uvicorn.run(app, host="0.0.0.0", port=port) 
